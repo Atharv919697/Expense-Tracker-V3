@@ -2,7 +2,7 @@ services:
   - type: web
     name: wa-bot-n8n
     env: node
-    plan: starter    # use Starter for 24/7; Free will sleep
+    plan: free    
     buildCommand: "npm install"
     startCommand: "npm start"
     envVars:
