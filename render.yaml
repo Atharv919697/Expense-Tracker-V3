@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: wa-bot-n8n
+    env: node
+    plan: starter    # use Starter for 24/7; Free will sleep
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    envVars:
+      # n8n required:
+      - key: N8N_PORT
+        value: "3000"
+      - key: N8N_PROTOCOL
+        value: "https"
+      - key: N8N_HOST
+        sync: false                # set after first deploy: <your-service>.onrender.com
+      - key: N8N_EDITOR_BASE_URL
+        sync: false                # set after first deploy: https://<your-service>.onrender.com
+      - key: WEBHOOK_URL
+        sync: false                # set after first deploy: https://<your-service>.onrender.com
+      - key: N8N_ENCRYPTION_KEY
+        sync: false                # set a long random string in dashboard
+      - key: GENERIC_TIMEZONE
+        value: "Asia/Kolkata"
+      - key: NODE_ENV
+        value: "production"
+      - key: N8N_DIAGNOSTICS_ENABLED
+        value: "false"
+
+      # bot:
+      - key: GROUP_JID
+        sync: false                # set after discovery
+      - key: N8N_WEBHOOK_URL
+        sync: false                # set to https://<your-service>.onrender.com/webhook/wa-expense
+
+    # Optional: add a Disk later for persistent WA session
+    # disks:
+    #   - name: wa-data
+    #     mountPath: /data
+    #     sizeGB: 1
